@@ -1,0 +1,75 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          training_conference
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: starts the training_conference unicorns
+# Description:       starts the training_conference unicorns
+### END INIT INFO
+
+# TODO: change user perms from root to www-data or similar user
+#       same has to go for application perms and unicorn rake task
+
+start()
+{
+  PID=`cat /var/www/training_conference/tmp/pids/unicorn-master.pid`
+
+  if [ "x$PID" = "x" ];
+  then
+     su root -c "cd /var/www/training_conference/ && rake unicorns:start[16,production]"
+     exit 0
+  else
+     echo "training_conference already running"
+     exit 1
+  fi
+}
+
+stop()
+{
+  PID=`cat /var/www/training_conference/tmp/pids/unicorn-master.pid`
+
+  if [ "x$PID" = "x" ];
+  then
+      echo "training_conference not running"
+      exit 2
+  else
+      su root -c "cd /var/www/training_conference/ && rake unicorns:stop"
+  fi
+}
+
+restart()
+{
+  su root -c "cd /var/www/training_conference/ && rake unicorns:restart"
+}
+
+status()
+{
+  PID=`cat /var/www/training_conference/tmp/pids/unicorn-master.pid`
+
+  if [ "x" = "x" ];
+  then
+      echo "training_conference not running"
+  else
+      echo "training_conference is running (PID: )"
+  fi
+  exit 0
+}
+
+# See how we were called.
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    restart
+    ;;
+  *)
+    echo $"Usage: $0 {start|stop|restart}"
+    exit 1
+esac

@@ -1,0 +1,6 @@
+# DESCRIPTION:
+training_conference is an ubuntu startup script
+
+# INSTALLATION:
+sudo ln -s /var/www/training_conference/script/init.d/training_conference /etc/init.d/training_conference
+sudo update-rc.d training_conference defaults 99
