@@ -5,7 +5,7 @@
 == NOTES:
 
 * It's invasive and should be made into a gem of sorts with a base template for project name, etc
-* I've included rake arguments for number of unicorns and rails env (which really should be a no-no since you can use RAILS/RACK_ENV) for convieniance of non-techie person
+* I've included rake arguments for number of unicorns and rails env (which really should be a no-no since you can use RAILS/RACK_ENV) for convenience of non-techie person
 * Noted in the init.d script, perms should be changed from root.
 * It'd be nice to distill the idea into a gem which builds and installs any necessary configuration scripts for a rails 3 app.
 
