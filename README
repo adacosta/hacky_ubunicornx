@@ -1,0 +1,18 @@
+== DESCRIPTION:
+
+* Hacky example of nginx + ubuntu + unicorn, ripped from a working app
+
+== NOTES:
+
+* It's invasive and should be made into a gem of sorts with a base template for project name, etc
+* I've included rake arguments for number of unicorns and rails env (which really should be a no-no since you can use RAILS/RACK_ENV) for convieniance of non-techie person
+* Noted in the init.d script, perms should be changed from root.
+* It'd be nice to distill the idea into a gem which builds and installs any necessary configuration scripts for a rails 3 app.
+
+== DIRECTIONS:
+
+* Copy the files in lib/ and script/ into your own rails 3 project.
+* Edit/replace script/init.d/training_conference. Replace references to "training_conference" to your own app. Rename the script to be the same as your app.
+* Open script/init.d/README. Follow directions for install. Yes this should be a simple rake task instead.
+* Edit lib/tasks/unicorns/unicorns.rake. Replace any references of "conference|conferences" with your own app name.
+* Edit/copy script/nginx/nginx.conf to your nginx configuration directory. Replace "training_conference" path with your own app path.
